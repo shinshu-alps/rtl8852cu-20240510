@@ -390,13 +390,13 @@ cd ~/src
 #### Step 6: Download the driver
 
 ```
-git clone https://github.com/morrownr/rtl8852cu.git
+git clone https://github.com/morrownr/rtl8852cu-20240510.git
 ```
 
 #### Step 7: Move to the newly created driver directory
 
 ```
-cd ~/src/rtl8852cu
+cd ~/src/rtl8852cu-20240510
 ```
 
 #### Step 8: Run the installation script (`install-driver.sh`)
