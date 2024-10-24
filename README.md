@@ -1,3 +1,11 @@
+Welcome testers.
+
+Please read Issues 1 and 2 for instructions on how to proceed.
+
+This document and the FAQ.md need work and I would appreciate you
+following the instructions here in the README.md file as close as
+possible so as to help find any corrections that need to be made.
+
 ## rtl8852cu ( 8852cu.ko ) :rocket:
 
 ## Linux Driver for USB WiFi Adapters that are based on the RTL8832CU and RTL8852CU Chipsets
