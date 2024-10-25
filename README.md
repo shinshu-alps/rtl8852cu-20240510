@@ -94,8 +94,6 @@ which can be provided via PR or message in Issues.
 
 - [Arch Linux](https://www.archlinux.org) (kernels 5.4 and 5.11)
 
-- [Armbian](https://www.armbian.com/) (kernel 5.15) (Rock 4 SE (Rock 4b image with xfce))
-
 - [Debian](https://www.debian.org/) (kernels 5.10, 5.15 and 6.1)
 
 - [Fedora](https://getfedora.org) Fedora 38 (6.2.13-300)
@@ -106,15 +104,11 @@ which can be provided via PR or message in Issues.
 
 - [openSUSE](https://www.opensuse.org/) Tumbleweed (rolling) (kernel 5.15)
 
-- [Raspberry Pi OS](https://www.raspberrypi.org) (2023-10-10)(kernel 6.1)
+- [Raspberry Pi OS](https://www.raspberrypi.org) (2023-10-10)(kernel 6.6)
 
 - [Raspberry Pi Desktop](https://www.raspberrypi.org) (2022-07-01) (x86 32 bit) (kernel 5.10)
 
-- [SkiffOS](https://github.com/skiffos/skiffos/) for Odroid XU4 (ARM 32 bit) (kernel 6.0.7)
-
 - [Ubuntu](https://www.ubuntu.com) 24.04 (kernel 6.8) and 24.10 (kernel 6.11)
-
-- [Void Linux](https://voidlinux.org/) (kernel 5.18)
 
 Note: Red Hat Enterprise Linux (RHEL) and distros based on RHEL are
 supported by Red Hat devs due to the way kernel patches are handled in
@@ -132,10 +126,11 @@ compile and maybe a modification or two to the Makefile).
 Current Android maintainer: none
 
 Note: OpenWRT is not supported. OpenWRT provides drivers for USB WiFi
-adapters. OpenWRT provided drivers include support for the MT7921au
-(AXE3000), MT7612u (AC1200), MT7610u (AC600) chipsets. It is a challenge
-to use Realtek based adapters that use out-of-kernel drivers with
-OpenWRT so it is strongly advised to use the already supported chipsets.
+adapters. OpenWRT provided drivers include support for the MT7925
+(BE6500), MT7921au (AXE3000), MT7612u (AC1200), MT7610u (AC600)
+chipsets. It is a challenge to use Realtek based adapters that use
+out-of-kernel drivers with OpenWRT so it is strongly advised to use the
+already supported chipsets.
 
 ### Compatible Devices
 
@@ -653,7 +648,8 @@ Note: These are general recommendations, some of which may not apply to
 your specific situation.
 
 - Security: Set WPA2-AES or WPA2/WPA3 mixed or WPA3. Do not set WPA2
-mixed mode or WPA or TKIP.
+mixed mode or WPA or TKIP. Some clients may not work well with WPA2/WPA3
+mixed.
 
 - Channel width for 2.4 GHz: Set 20 MHz fixed width. Do not use 40 MHz
 or 20/40 automatic.
@@ -662,17 +658,20 @@ or 20/40 automatic.
 congestion at your location. Do not set automatic channel selection. As
 time passes, if you notice poor performance, recheck congestion and set
 channel appropriately. The environment around you can and does change
-over time.
+over time. With the advent of WiFi 6, Wifi 6 (AX) is now available for
+the 2.4 GHz band. No problems have been noted when setting an AP/wifi
+router to mixed WiFi 4 (n) and WiFi 6 (ax).
 
 - Mode for 2.4 GHz: For best performance, set "N only" if you no longer
-use B or G capable devices.
+use B or G capable devices. Or, as noted above, you can use mixed n and
+ax mode.
 
-- Network names: Do not set the 2.4 GHz Network and the 5 GHz Network
-to the same name. Note: Unfortunately many routers come with both
-networks set to the same name. You need to be able to control which
-network that is in use so changing the name of one of the networks is
-recommended. Since many IoT devices use the 2.4 GHz network, it may be
-better to change the name of the 5 GHz network.
+- Network names: Do not set the 2.4 GHz Network, 5 GHz Network or the
+6 GHz Network to the same name. Note: Unfortunately many routers come
+with all networks set to the same name. You need to be able to control
+which network that is in use so changing the name of one of the networks
+is recommended. Since many IoT devices use the 2.4 GHz network, it may
+be better to change the names of the 5 GHz and 6 GHz networks.
 
 - Channels for 5 GHz: Not all devices are capable of using DFS channels
 (I'm looking at you Roku.) It may be necessary to set a fixed channel in
@@ -695,19 +694,24 @@ After making and saving changes, reboot the router.
 ### Recommendations regarding USB
 
 - Moving your USB WiFi adapter to a different USB port has been known to
-fix a variety of problems.
+fix a variety of problems. Don't ask.
 
 - If connecting your USB WiFi adapter to a desktop computer, use the USB
 ports on the rear of the computer. Why? The ports on the rear are
 directly connected to the motherboard which will reduce problems with
-interference and disconnection.
+interference and disconnection. A good quality usb extension cable may
+be useful to place the adapter in a location where the signal is good.
 
 - If your USB WiFi adapter is USB 3 capable and you want it to operate
 in USB3 mode, plug it into a USB 3 port.
 
-- Avoid USB 3.1 Gen 2 ports if possible as almost all currently
-available adapters have been tested with USB 3.1 Gen 1 (aka USB 3) and
-not with USB 3.1 Gen 2.
+- Avoid USB 3.1 Gen 2 ports if possible as most currently available
+adapters have been tested with USB 3.1 Gen 1 (aka USB 3) and not with
+USB 3.1 Gen 2.
+
+- Modern USB 3.1 Gen 2 ports can be problematic with some adapters,
+especially older adapters. You may need to check USB setting in your
+BIOS to see if changing setting can help compatibility.
 
 - If you use an extension cable and your adapter is USB 3 capable, the
 cable needs to be USB 3 capable (if not, you will be limited to USB 2
