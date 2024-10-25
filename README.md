@@ -577,7 +577,7 @@ sudo ./edit-options.sh
 ```
 
 Note: Documentation for Driver Options is included in the file
- `8852bu.conf`.
+ `8852cu.conf`.
 
 -----
 
