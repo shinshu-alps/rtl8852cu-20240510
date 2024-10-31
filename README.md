@@ -134,10 +134,13 @@ already supported chipsets.
 
 ### Compatible Devices
 
+* Edup AX5400 EP-AX1671 (single-state, no windows driver onboard)
+
 Warning: The below adapters are multi-state adapters, meaning that they
 have an internal Windows driver, and may be problematic on Linux.
 
 * Brostrend AX8
+
 * Additional adapters that are based on the supported chipsets.
 
 Note: If you are looking for information about what adapter to buy,
