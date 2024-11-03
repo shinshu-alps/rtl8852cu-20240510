@@ -230,7 +230,7 @@ Secure Boot: see FAQ.
 
 ### Installation Steps
 
-Note: The installation instructions are for the novice user. Experienced
+Note: The installation steps are for the novice user. Experienced
 users are welcome to alter the installation to meet their needs. Support
 will be provided, on a best effort basis, based on the steps below. Another
 way to word this paragraph is that if you do not follow the below steps for
