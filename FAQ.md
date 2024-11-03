@@ -1,5 +1,72 @@
 ### FAQ
 
+Multi-state (storage for Windows driver onboard) Adapter is not
+Switching to WiFi mode properly
+
+Question: My USB WiFi adapter is not showing up and it is a multi-state
+adapter, what do I do?
+
+Answer: The usb_modeswitch utility generally handles this issue but
+there are situations where it does not work. Your options:
+
+1. Send your adapter back and get one that is single-state(no storage
+onboard). If that is not possible then:
+
+2. You need to check if the VID/PID for your adapter is in the 
+usb_modeswitch data file. See the following link for more information:
+
+https://github.com/morrownr/USB-WiFi/blob/main/home/How_to_Modeswitch.md
+
+If you have exhausted recommendations from the information in item 2,
+then:
+
+3. You may be able to make the adapter work in wifi mode with the 
+following method:
+
+How to add kernel parameters with GRUB in Ubuntu:
+
+Note: This method may vary by distro so if you are not using Ubuntu,
+please consult the documentation for your distro.
+
+Once your device has booted, use a text editor to open like this:
+
+$ sudo nano /etc/default/grub
+
+Add parameters to GRUB_CMDLINE_LINUX while keeping the following in
+mind:
+
+Enter parameters inside the double-quotes
+
+Leave a space before each new parameter
+
+Don’t add space round = and other punctuations for each key-value
+
+Don’t add line breaks
+
+If you original line looks like:
+
+GRUB_CMDLINE_LINUX="quiet"
+
+Then you updated line should read like:
+
+GRUB_CMDLINE_LINUX="quiet usb-storage.quirks=0bda:1a2b:i"
+
+Note: you will need to change 0bda:1a2b to the stoarge mode VID/PID of
+your adapter.
+
+Save and close the editor.
+
+Update GRUB with its new configuration:
+
+$ sudo update-grub
+
+$ sudo reboot
+
+Note: If your distro does not use grub, the RasPiOS is an example, you
+will need to read your distro docs to see how to do the above.
+
+-----
+
 Secure Boot Information
 
 Question: The driver installation script completed successfully and the
@@ -86,12 +153,12 @@ It provides secure boot instructions.
 
 Question: Is WPA3 supported?
 
-Answer: WPA3-SAE is supported. It works well on most modern Linux distros
-but not all. Generally the reason for WPA3 not working on Linux distros is
-that the distro has an old version of wpa_supplicant or Network Manager.
-Your options are to upgrade to a more modern distro such as those released
-after mid-2022 or compile and install new versions of wpa_supplicant and/or
-Network Manager.
+Answer: WPA3-SAE is supported. It works well on most modern Linux
+distros but not all. Generally the reason for WPA3 not working on Linux
+distros is that the distro has an old version of wpa_supplicant or
+Network Manager. Your options are to upgrade to a more modern distro
+such as those released after mid-2022 or compile and install new
+versions of wpa_supplicant and/or Network Manager.
 
 -----
 
@@ -103,9 +170,9 @@ same chipset in the same computer. You can have multiple Realtek based
 adapters in the same computer as long as the adapters are based on
 different chipsets.
 
-Recommendation: If this is an important capability for you, I have tested
-Mediatek adapters for this capability and it does work with adapters that
-use the following chipsets: mt7921au, mt7612u and mt7610u.
+Recommendation: If this is an important capability for you, I have
+tested Mediatek adapters for this capability and it does work with
+adapters that use the following chipsets: mt7921au, mt7612u and mt7610u.
 
 -----
 
@@ -127,7 +194,7 @@ https://github.com/morrownr/USB-WiFi
 
 Question: Will you put volunteers to work?
 
-Answer: Yes. Post a message in `Issues` or `Discussions` if interested.
+Answer: Yes. Post a message in `Issues` if interested.
 
 -----
 
@@ -139,60 +206,10 @@ Answer: This [article](https://null-byte.wonderhowto.com/forum/wifi-hacking-atta
 
 Question: Can you provide additional information about monitor mode?
 
-Answer: I have a repo that is setup to help with monitor mode:
+Answer: Realtek adapters generally do not support monitor mode very well
+so I recommend you but an adapter with a Mediatek chip:
 
-https://github.com/morrownr/Monitor_Mode
-
-Work to improve monitor mode is ongoing with this driver. Your reports of
-success or failure are needed. If you have yet to buy an adapter to use with
-monitor mode, there are adapters available that are known to work very well
-with monitor mode. My recommendation for those looking to buy an adapter for
-monitor mode is to buy adapters based on the following chipsets: mt7921au,
-mt7612u, mt7610u, rtl8821cu, and rtl8812bu. My specific recommendations for
-adapters in order of preference currently are:
-
-ALFA AWUS036ACHM - long range - in-kernel driver
-
-ALFA AWUS036ACM - in-kernel driver
-
-ALFA AWUS036ACU - in-kernel driver (as of kernel 6.2) and [out-of-kernel driver](https://github.com/morrownr/8821cu)
-
-To ask questions, go to [USB-WiFi](https://github.com/morrownr/USB-WiFi)
-and post in `Discussions` or `Issues`.
-
------
-
-Question: How do I forget a saved WiFi network on a Raspberry Pi?
-
-Note: This answer is for the Raspberry Pi OS without Network Manager active.
-
-Step 1: Edit `wpa_supplicant.conf`
-
-```
-sudo ${EDITOR} /etc/wpa_supplicant/wpa_supplicant.conf
-```
-
-Note: Replace ${EDITOR} with the name of the text editor you wish to use.
-
-#### Step 2: Delete the relevant WiFi network block (including the '`network=`' and opening/closing braces).
-
-#### Step 3: Save the file.
-
-#### Step 4: Reboot
-
------
-
-Question: How do I disable the onboard WiFi in a Raspberry Pi?
-
-Note: This answer is for the Raspberry Pi OS.
-
-Answer:
-
-Add the following line to `/boot/config.txt`
-
-```
-dtoverlay=disable-wifi
-```
+https://github.com/morrownr/USB-WiFi
 
 -----
 
