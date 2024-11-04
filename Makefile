@@ -16,16 +16,24 @@ EXTRA_CFLAGS += -Wno-unused
 #EXTRA_CFLAGS += -Wno-uninitialized
 
 EXTRA_CFLAGS += -Wno-implicit-fallthrough
-
 EXTRA_CFLAGS += -Wno-sizeof-array-div
 
+# gcc-12
 EXTRA_CFLAGS += -Wno-address
+EXTRA_CFLAGS += -Wframe-larger-than=1648
 EXTRA_CFLAGS += -Wno-missing-prototypes
 EXTRA_CFLAGS += -Wno-missing-declarations
+#EXTRA_CFLAGS += -Wno-cast-function-type
 
+# gcc-13
+EXTRA_CFLAGS += -Wno-enum-int-mismatch
+#EXTRA_CFLAGS += -Wno-stringop-overread
 EXTRA_CFLAGS += -Wno-enum-conversion
+#EXTRA_CFLAGS += -Wno-int-in-bool-context
 EXTRA_CFLAGS += -Wno-missing-prototypes
+#EXTRA_CFLAGS += -Wno-missing-declarations
 
+# gcc-14
 EXTRA_CFLAGS += -Wno-empty-body
 EXTRA_CFLAGS += -Wno-old-style-declaration
 EXTRA_CFLAGS += -Wno-restrict
@@ -35,6 +43,7 @@ ifeq ($(GCC_VER_49),1)
 EXTRA_CFLAGS += -Wno-date-time	# Fix compile error && warning on gcc 4.9 and later
 endif
 
+# ensure gcc is using the correct ARCH name
 SUBARCH := $(shell uname -m | sed -e "s/i.86/i386/; s/aarch64/arm64/; s/armv.l/arm/; s/riscv.*/riscv/; s/ppc/powerpc/;")
 ARCH ?= $(SUBARCH)
 
