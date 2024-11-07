@@ -32,13 +32,9 @@ following links will provide more information:
 
 ### Supported Features
 
-Note: The following list of capabilities is mostly based on what Realtek
-says the capabilities are. However, testing has been limited on anything
-beyond managed mode and AP mode.
-
 - IEEE 802.11 b/g/n/ac/ax WiFi compliant
 - 802.1x, WEP, WPA TKIP and WPA2 AES/Mixed mode for PSK and TLS (Radius)
-- WPA3-SAE R3
+- WPA3-SAE R2
 - WPS - PIN and PBC Methods
 - IEEE 802.11b/g/n/ac/ax Client mode
   * Supports wireless security for WEP, WPA TKIP and WPA2 AES PSK
@@ -46,16 +42,15 @@ beyond managed mode and AP mode.
   * Supports WPA/WPA2 TLS client
 - Miracast
 - WiFi-Direct
-- Mesh
 - Wake on WLAN
 - AP mode DFS channel support
 - Supported interface modes
-  * IBSS (no testing)
+  * IBSS (not tested)
   * Managed
-  * AP
-  * P2P-client (no testing)
-  * P2P-GO (no testing)
-- VHT control (allows 80 MHz channel width in AP mode)
+  * AP (see file hpstapd-rtl8852cu.conf)
+  * P2P-client
+  * P2P-GO
+- VHT control (allows 160 MHz channel width in AP mode)
 - HE control (allows 160 MHz channel width in AP mode)
 - USB mode control
 
@@ -78,7 +73,7 @@ the hardware to test the above.
 ### Compatible Kernels
 
 - Kernels: 5.4 - 6.6 (Realtek)
-- Kernels: 6.7 - 6.11 (community support)
+- Kernels: 6.7 - 6.12 (community support)
 
 Note: Kernels earlier than 5.4 may work but are not tested or
 supported.
@@ -130,7 +125,7 @@ adapters. OpenWRT provided drivers include support for the MT7925
 (BE6500), MT7921au (AXE3000), MT7612u (AC1200), MT7610u (AC600)
 chipsets. It is a challenge to use Realtek based adapters that use
 out-of-kernel drivers with OpenWRT so it is strongly advised to use the
-already supported chipsets.
+already supported Mediatek chipsets.
 
 ### Compatible Devices
 
@@ -139,6 +134,7 @@ already supported chipsets.
 Warning: The below adapters are multi-state adapters, meaning that they
 have an internal Windows driver, and may be problematic on Linux.
 
+* Edup AX5400 EP-AX1671S
 * Brostrend AX8
 
 * Additional adapters that are based on the supported chipsets.
