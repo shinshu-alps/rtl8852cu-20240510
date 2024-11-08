@@ -44,8 +44,8 @@ EXTRA_CFLAGS += -Wno-date-time	# Fix compile error && warning on gcc 4.9 and lat
 endif
 
 # ensure gcc is using the correct ARCH name
-SUBARCH := $(shell uname -m | sed -e "s/i.86/i386/; s/aarch64/arm64/; s/armv.l/arm/; s/riscv.*/riscv/; s/ppc/powerpc/;")
-ARCH ?= $(SUBARCH)
+#SUBARCH := $(shell uname -m | sed -e "s/i.86/i386/; s/aarch64/arm64/; s/armv.l/arm/; s/riscv.*/riscv/; s/ppc/powerpc/;")
+#ARCH ?= $(SUBARCH)
 
 EXTRA_CFLAGS += -I$(src)/include
 
