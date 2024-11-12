@@ -33,6 +33,9 @@ EXTRA_CFLAGS += -Wno-enum-conversion
 EXTRA_CFLAGS += -Wno-missing-prototypes
 #EXTRA_CFLAGS += -Wno-missing-declarations
 
+# uncomment to enable concurrent mode
+#EXTRA_CFLAGS += -DCONFIG_CONCURRENT_MODE
+
 # gcc-14
 EXTRA_CFLAGS += -Wno-empty-body
 EXTRA_CFLAGS += -Wno-old-style-declaration
