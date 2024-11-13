@@ -136,6 +136,8 @@ have an internal Windows driver, and may be problematic on Linux.
 
 * Edup AX5400 EP-AX1671S
 * Brostrend AX8
+* TP-Link Archer TX50UH V1
+* TP-Link Archer TXE70UH(EU) V1
 
 * Additional adapters that are based on the supported chipsets.
 
