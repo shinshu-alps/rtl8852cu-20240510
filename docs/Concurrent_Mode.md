@@ -1,12 +1,13 @@
-2022-12-27
+2024-12-05
 
 What is Concurrent Mode?
 
-Concurrent Mode creates 2 wireless network interfaces (wlan0, wlan1) and those
-two interfaces share the same WiFi adapter.
+Concurrent Mode creates 2 wireless network interfaces (wlan0 and wlan1
+depending on your setup) and those two interfaces share the same WiFi
+adapter.
 
-This feature allows performing 2 separate wireless tasks at the same time with a
-single WiFi adapter.
+This feature allows performing 2 separate wireless tasks at the same
+time with a single WiFi adapter.
 
 For example:
 
@@ -32,16 +33,16 @@ Edit the `Makefile` with a text editor:
 ${EDITOR} Makefile
 ```
 
-Change the following line:
+Find the following line:
 
 ```
-#EXTRA_CFLAGS += -DCONFIG_CONCURRENT_MODE
+CONFIG_CONCURRENT_MODE = n
 ```
 
-to 
+Change it to: 
 
 ```
-EXTRA_CFLAGS += -DCONFIG_CONCURRENT_MODE
+CONFIG_CONCURRENT_MODE = y
 ```
 
 and then install the driver per the installation steps. If
@@ -58,8 +59,8 @@ sudo ./install-driver.sh
 
 Once the driver is fully installed and you have rebooted the system, you
 can verify that this works by typing the “iw dev” command. You should
-see two wireless interfaces, and the MAC address of the secondary interface
-is nearly the same as the first except for one digit.
+see two wireless interfaces, and the MAC address of the secondary
+interface is nearly the same as the first except for one digit.
 
 -----
 
@@ -82,13 +83,13 @@ Assume the throughput limitation of current environment is 85Mb/s,
 then the throughput of wlan0 + the throughput of wlan1 is basically
 equal or smaller than 85Mb/s.
 
-Q: Everything is fine when I only start hostapd, but when I start running
-station mode in the other interface at the same time, hostapd will disconnect
-for a moment then will reconnect again, however ,the channel is differ from
-before. Is something wrong?
+Q: Everything is fine when I only start hostapd, but when I start
+running station mode in the other interface at the same time, hostapd
+will disconnect for a moment then will reconnect again, however, the
+channel is differ from before. Is something wrong?
 
-A: Don’t worry, it is fine! As mentioned before, those two wireless interfaces
-share the same physical hardware device. That means those 2 wireless interfaces
-must use the same channel. The AP/P2P interface should use the same channel as
-the station interface. If both interfaces are running in station mode, the
-connected APs MUST be on same channel.
+A: Don’t worry, it is fine! As mentioned before, those two wireless
+interfaces share the same physical hardware device. That means those 2
+wireless interfaces must use the same channel. The AP/P2P interface
+should use the same channel as the station interface. If both interfaces
+are running in station mode, the connected APs MUST be on same channel.
