@@ -18,14 +18,12 @@ EXTRA_CFLAGS += -Wno-unused
 EXTRA_CFLAGS += -Wno-implicit-fallthrough
 EXTRA_CFLAGS += -Wno-sizeof-array-div
 
-# gcc-12
 EXTRA_CFLAGS += -Wno-address
 EXTRA_CFLAGS += -Wframe-larger-than=1648
 EXTRA_CFLAGS += -Wno-missing-prototypes
 EXTRA_CFLAGS += -Wno-missing-declarations
 #EXTRA_CFLAGS += -Wno-cast-function-type
 
-# gcc-13
 EXTRA_CFLAGS += -Wno-enum-int-mismatch
 #EXTRA_CFLAGS += -Wno-stringop-overread
 EXTRA_CFLAGS += -Wno-enum-conversion
@@ -33,22 +31,15 @@ EXTRA_CFLAGS += -Wno-enum-conversion
 EXTRA_CFLAGS += -Wno-missing-prototypes
 #EXTRA_CFLAGS += -Wno-missing-declarations
 
-# uncomment to enable concurrent mode
-#EXTRA_CFLAGS += -DCONFIG_CONCURRENT_MODE
-
-# gcc-14
 EXTRA_CFLAGS += -Wno-empty-body
 EXTRA_CFLAGS += -Wno-old-style-declaration
 EXTRA_CFLAGS += -Wno-restrict
+EXTRA_CFLAGS += -Wno-incompatible-pointer-types
 
 GCC_VER_49 := $(shell echo `$(CC) -dumpversion | cut -f1-2 -d.` \>= 4.9 | bc )
 ifeq ($(GCC_VER_49),1)
 EXTRA_CFLAGS += -Wno-date-time	# Fix compile error && warning on gcc 4.9 and later
 endif
-
-# ensure gcc is using the correct ARCH name
-#SUBARCH := $(shell uname -m | sed -e "s/i.86/i386/; s/aarch64/arm64/; s/armv.l/arm/; s/riscv.*/riscv/; s/ppc/powerpc/;")
-#ARCH ?= $(SUBARCH)
 
 EXTRA_CFLAGS += -I$(src)/include
 
@@ -732,11 +723,11 @@ export CONFIG_RTL8852CU = m
 all: modules
 
 modules:
-	#rm -f .symvers.$(MODULE_NAME)
+#	rm -f .symvers.$(MODULE_NAME)
 
 	$(MAKE) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) -C $(KSRC) M=$(shell pwd)  modules
 
-	#cp Module.symvers .symvers.$(MODULE_NAME)
+#	cp Module.symvers .symvers.$(MODULE_NAME)
 
 strip:
 	$(CROSS_COMPILE)strip $(MODULE_NAME).ko --strip-unneeded
@@ -744,17 +735,20 @@ strip:
 install:
 	install -p -m 644 $(MODULE_NAME).ko  $(MODDESTDIR)
 	/sbin/depmod -a ${KVER}
+#	cp -f 8852cu.conf /etc/modprobe.d
+#	sh edit-options.sh
 
 uninstall:
 	rm -f $(MODDESTDIR)$(MODULE_NAME).ko
 	/sbin/depmod -a ${KVER}
+# 	rm -f /etc/modprobe.d/8852cu.conf
 
 sign:
 	@openssl req -new -x509 -newkey rsa:2048 -keyout MOK.priv -outform DER -out MOK.der -nodes -days 36500 -subj "/CN=Custom MOK/"
 	@mokutil --import MOK.der
 	@$(KSRC)/scripts/sign-file sha256 MOK.priv MOK.der 8852cu.ko
 
-sign-install: sign install
+sign-install: all sign install
 
 backup_rtlwifi:
 	@echo "Making backup rtlwifi drivers"
