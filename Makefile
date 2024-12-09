@@ -146,7 +146,7 @@ endif
 CONFIG_RTW_DEBUG = y
 # default log level is _DRV_INFO_ = 4,
 # please refer to "How_to_set_driver_debug_log_level.doc" to set the available level.
-CONFIG_RTW_LOG_LEVEL = 4
+CONFIG_RTW_LOG_LEVEL = 0
 
 # enable /proc/net/rtlxxxx/ debug interfaces
 CONFIG_PROC_DEBUG = y
@@ -723,30 +723,27 @@ export CONFIG_RTL8852CU = m
 all: modules
 
 modules:
-#	rm -f .symvers.$(MODULE_NAME)
-
-	$(MAKE) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) -C $(KSRC) M=$(shell pwd)  modules
-
-#	cp Module.symvers .symvers.$(MODULE_NAME)
+	$(MAKE) ARCH=$(ARCH) CROSS_COMPILE=$(CROSS_COMPILE) -C $(KSRC) M=$(shell pwd) modules
 
 strip:
 	$(CROSS_COMPILE)strip $(MODULE_NAME).ko --strip-unneeded
 
-install:
+install: all
 	install -p -m 644 $(MODULE_NAME).ko  $(MODDESTDIR)
 	/sbin/depmod -a ${KVER}
-#	cp -f 8852cu.conf /etc/modprobe.d
-#	sh edit-options.sh
+	cp -f $(MODULE_NAME).conf /etc/modprobe.d
+	sh edit-options.sh
 
 uninstall:
 	rm -f $(MODDESTDIR)$(MODULE_NAME).ko
 	/sbin/depmod -a ${KVER}
-# 	rm -f /etc/modprobe.d/8852cu.conf
+	rm -f /etc/modprobe.d/$(MODULE_NAME).conf
+	@echo "uninstall comlete"
 
 sign:
-	@openssl req -new -x509 -newkey rsa:2048 -keyout MOK.priv -outform DER -out MOK.der -nodes -days 36500 -subj "/CN=Custom MOK/"
-	@mokutil --import MOK.der
-	@$(KSRC)/scripts/sign-file sha256 MOK.priv MOK.der 8852cu.ko
+	openssl req -new -x509 -newkey rsa:2048 -keyout MOK.priv -outform DER -out MOK.der -nodes -days 36500 -subj "/CN=Custom MOK/"
+	mokutil --import MOK.der
+	$(KSRC)/scripts/sign-file sha256 MOK.priv MOK.der 8852cu.ko
 
 sign-install: all sign install
 

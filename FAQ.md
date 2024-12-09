@@ -51,7 +51,7 @@ Then you updated line should read like:
 
 GRUB_CMDLINE_LINUX="quiet usb-storage.quirks=0bda:1a2b:i"
 
-Note: you will need to change 0bda:1a2b to the stoarge mode VID/PID of
+Note: you will need to change 0bda:1a2b to the storage mode VID/PID of
 your adapter.
 
 Save and close the editor.
@@ -64,6 +64,16 @@ $ sudo reboot
 
 Note: If your distro does not use grub, the RasPiOS is an example, you
 will need to read your distro docs to see how to do the above.
+
+Example for Raspberry Pi OS:
+
+$ sudo nano /boot/firmware/cmdline.txt
+
+add the following to the end of the `console=` line:
+
+usb-storage.quirks=0bda:1a2b:i
+
+Save, close the editor and reboot.
 
 -----
 

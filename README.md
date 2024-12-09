@@ -163,11 +163,11 @@ effort basis, if the Installation Steps in the next section are followed.
 
 Warning: Installing multiple out-of-kernel drivers for the same hardware
 usually does not end well. The install-driver.sh script has the
-capability to detect and remove most conflicting drivers but not all. If
-this driver does not work well after installation and you have
-previously installed a driver that you did not remove, it is suggested
+capability to detect and uninstall most conflicting drivers but not all.
+If this driver does not work well after installation and you have
+previously installed a driver that you did not uninstall, it is suggested
 that you run the following command in an effort to determine if you need
-to take action to manually remove conflicting drivers:
+to take action to manually uninstall conflicting drivers:
 
 ```
 sudo dkms status
@@ -187,7 +187,7 @@ Note: Do not reboot before running the below command so that the driver
 stays active until after your distro upgrade is complete.
 
 ```
-sudo sh remove-driver.sh
+sudo sh uninstall-driver.sh
 ```
 
 Note: The following command will reinstall the updated driver after you
@@ -535,7 +535,7 @@ your distro.
 
 ### Manual Removal Instructions
 
-To remove the driver if installed by the Manual Installation
+To uninstall the driver if installed by the Manual Installation
 Instructions:
 
 ```
@@ -594,10 +594,10 @@ kernel 5.10 to kernel 5.15)
 cd ~/src/rtl8852cu
 ```
 
-#### Step 2: Remove the currently installed driver
+#### Step 2: Uninstalling the currently installed driver
 
 ```
-sudo ./remove-driver.sh
+sudo ./uninstall-driver.sh
 ```
 
 #### Step 3: Pull updated code from this repo
@@ -613,14 +613,14 @@ sudo ./install-driver.sh
 ```
 
 -----
-### Removal of the Driver (`remove-driver.sh`)
+### Removal of the Driver (`uninstall-driver.sh`)
 
 Note: Removing the driver is advised in the following situations:
 
 - if driver installation fails
 - if the driver is no longer needed
 
-Note: The following removes everything that has been installed, with the
+Note: The following uninstalls everything that has been installed, with the
 exception of the packages installed in Step 3 and the driver directory.
 The driver directory can be deleted after running this script.
 
@@ -638,7 +638,7 @@ Note: For automated builds (non-interactive), use `NoPrompt` as an
 option.
 
 ```
-sudo ./remove-driver.sh
+sudo ./uninstall-driver.sh
 ```
 
 -----
