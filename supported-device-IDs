@@ -7,22 +7,23 @@ $ lsusb
 
 Example output:
 
-Bus 003 Device 011: ID 0bda:C832 Realtek Semiconductor Corp.
+Bus 003 Device 011: ID 0bda:c832 Realtek Semiconductor Corp.
 
-ID VendorID:DeviceID = 0bda:C832
+ID VendorID:DeviceID = 0bda:c832
 
 We can search the list of driver supported IDs shown below.
 
 Realtek default IDs
 
-ID 0BDA:C832 - Default ID
-ID 0BDA:C85A - Default ID
-ID 0BDA:C85D - Default ID
+ID 0bda:c832 - Default ID
+ID 0bda:c85a - Default ID
+ID 0bda:c85d - Default ID
 
 Seller specific IDs
 
-ID 35BC:0101 - TP-Link Archer TX50UH V1
-ID 35BC:0102 - TP-Link Archer TXE70UH(EU) V1
+ID 35b2:0502 - TP-Link
+ID 35bc:0101 - TP-Link Archer TX50UH V1
+ID 35bc:0102 - TP-Link Archer TXE70UH(EU) V1
 
 
 If your adapter matches one of the default or seller specific

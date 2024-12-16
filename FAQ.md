@@ -1,15 +1,22 @@
 ### FAQ
 
-Multi-state (storage for Windows driver onboard) Adapter is not
-Switching to WiFi mode properly
+Question: My USB WiFi adapter is showing up as a CDROM or Flash drive
+instead of a WiFi adapter. What is the problem?
 
-Question: My USB WiFi adapter is not showing up and it is a multi-state
-adapter, what do I do?
+Answer: Your Realtek USB WiFi adapter showing up as a CDROM or Flash
+drive (often with ID 0bda:1a2b) instead of functioning as a network
+adapter (such as ID 35bc:0102 or similar) is likely due to a
+"mode-switching" issue. Some USB WiFi adapters include onboard memory
+that contains drivers or installation software for Windows. When plugged
+into a system for the first time, they initially present themselves as a
+virtual CD-ROM or Flash driver containing the drivers.
 
-Answer: The usb_modeswitch utility generally handles this issue but
-there are situations where it does not work. Your options:
+In Linux, the `usb_modeswitch` utility generally handles this issue but
+there are situations where it does not work as expected.
 
-1. Send your adapter back and get one that is single-state(no storage
+ Your options:
+
+1. Send your adapter back and get one that is single-state (no storage
 onboard). If that is not possible then:
 
 2. You need to check if the VID/PID for your adapter is in the 
@@ -28,7 +35,8 @@ How to add kernel parameters with GRUB in Ubuntu:
 Note: This method may vary by distro so if you are not using Ubuntu,
 please consult the documentation for your distro.
 
-Once your device has booted, use a text editor to open like this:
+Once your device has booted, use a text editor to open the following 
+file:
 
 $ sudo nano /etc/default/grub
 
@@ -43,16 +51,16 @@ Don’t add space round = and other punctuations for each key-value
 
 Don’t add line breaks
 
-If you original line looks like:
+If your original line looks like:
 
 GRUB_CMDLINE_LINUX="quiet"
 
-Then you updated line should read like:
+Then your updated line should read like:
 
 GRUB_CMDLINE_LINUX="quiet usb-storage.quirks=0bda:1a2b:i"
 
-Note: you will need to change 0bda:1a2b to the storage mode VID/PID of
-your adapter.
+Note: If the storage VId/PID (ID) i not 0bda:1a2b, you will need to
+change 0bda:1a2b to the storage mode VID/PID of your adapter.
 
 Save and close the editor.
 

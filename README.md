@@ -54,6 +54,12 @@ following links will provide more information:
 - HE control (allows 160 MHz channel width in AP mode)
 - USB mode control
 
+> [!NOTE]
+> Monitor mode is not supported.
+> Linux users that want good support for monitor mode in a dual band or tri-band
+> adapter should seek out USB WiFi adapters based on the mt7610u, mt7612u or mt7921au
+> chipsets.
+
 ### A FAQ is available in this repo with the name `FAQ.md`
 
 - Please read the FAQ and this document before posting issues.
@@ -594,28 +600,22 @@ kernel 5.10 to kernel 5.15)
 cd ~/src/rtl8852cu
 ```
 
-#### Step 2: Uninstalling the currently installed driver
-
-```
-sudo ./uninstall-driver.sh
-```
-
-#### Step 3: Pull updated code from this repo
+#### Step 2: Pull updated code from this repo
 
 ```
 git pull
 ```
 
-#### Step 4: Install the driver
+#### Step 3: Install the driver
 
 ```
 sudo ./install-driver.sh
 ```
 
 -----
-### Removal of the Driver (`uninstall-driver.sh`)
+### Uninstalling the Driver (`uninstall-driver.sh`)
 
-Note: Removing the driver is advised in the following situations:
+Note: Uninstalling the driver is advised in the following situations:
 
 - if driver installation fails
 - if the driver is no longer needed
@@ -629,7 +629,7 @@ The driver directory can be deleted after running this script.
 #### Step 2: Move to the driver directory
 
 ```
-cd ~/src/rtl8852bu
+cd ~/src/rtl8852cu
 ```
 
 #### Step 3: Run the removal script

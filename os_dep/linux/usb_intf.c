@@ -167,11 +167,12 @@ static struct usb_device_id rtw_usb_id_tbl[] = {
 
 #ifdef CONFIG_RTL8852C
 	/*=== Realtek demoboard ===*/
-	{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDER_ID_REALTEK, 0xC832, 0xff, 0xff, 0xff), .driver_info = RTL8852C},
-	{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDER_ID_REALTEK, 0xC85A, 0xff, 0xff, 0xff), .driver_info = RTL8852C},
-	{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDER_ID_REALTEK, 0xC85D, 0xff, 0xff, 0xff), .driver_info = RTL8852C},
-	{USB_DEVICE_AND_INTERFACE_INFO(0x35BC, 0x0101, 0xff, 0xff, 0xff), .driver_info = RTL8852C}, /* TP-Link Archer TX50UH V1 */
-	{USB_DEVICE_AND_INTERFACE_INFO(0x35BC, 0x0102, 0xff, 0xff, 0xff), .driver_info = RTL8852C}, /* TP-Link Archer TXE70UH(EU) V1 */
+	{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDER_ID_REALTEK, 0xc832, 0xff, 0xff, 0xff), .driver_info = RTL8852C},
+	{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDER_ID_REALTEK, 0xc85A, 0xff, 0xff, 0xff), .driver_info = RTL8852C},
+	{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDER_ID_REALTEK, 0xc85D, 0xff, 0xff, 0xff), .driver_info = RTL8852C},
+	{USB_DEVICE_AND_INTERFACE_INFO(0x35b2, 0x0502, 0xff, 0xff, 0xff), .driver_info = RTL8852C}, /* TP-Link */
+	{USB_DEVICE_AND_INTERFACE_INFO(0x35bc, 0x0101, 0xff, 0xff, 0xff), .driver_info = RTL8852C}, /* TP-Link Archer TX50UH V1 */
+	{USB_DEVICE_AND_INTERFACE_INFO(0x35bc, 0x0102, 0xff, 0xff, 0xff), .driver_info = RTL8852C}, /* TP-Link Archer TXE70UH(EU) V1 */
 #endif /* CONFIG_RTL8852C */
 
 	{}	/* Terminating entry */

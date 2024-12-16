@@ -151,7 +151,7 @@ if command -v dkms >/dev/null 2>&1; then
 	dkms status | while IFS="/,: " read -r drvname drvver kerver _dummy; do
 		case "$drvname" in *${MODULE_NAME})
 			if [ "${kerver}" = "added" ]; then
-				echo "Uninstalling a driver that was added to dkms."
+				echo "Removing a driver that was added to dkms."
 				dkms remove -m "${drvname}" -v "${drvver}" --all
 			else
 				echo "Uninstalling a driver that was installed by dkms."
