@@ -192,7 +192,7 @@ fi
 # https://docs.kernel.org/networking/regulatory.html
 # https://www.marcusfolkesson.se/blog/linux-wireless-regulatory/
 if command -v iw >/dev/null 2>&1; then
-	echo ": Linux Wireless Regulatory Settings:"
+	echo ": Wireless Regulatory Settings:"
 	iw reg get | grep -i 'global\|country\|phy#'
 	echo ": Info: https://docs.kernel.org/networking/regulatory.html"
 	echo ": Info: https://www.marcusfolkesson.se/blog/linux-wireless-regulatory/"
