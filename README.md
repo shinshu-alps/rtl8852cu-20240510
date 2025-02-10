@@ -64,17 +64,16 @@ following links will provide more information:
 - x86-64, amd64
 - armv6l, armv7l (arm)
 - aarch64 (arm64)
+- riscv
 
-Note: Additional CPU architectures may work but I currently only have
-the hardware to test the above.
+Note: Additional CPU architectures may work but have not been tested.
 
 ### Compatible Kernels
 
-- Kernels: 5.4 - 6.6 (Realtek)
-- Kernels: 6.7 - 6.12 (community support)
+- Kernels: 5.10 - 6.6 (Realtek)
+- Kernels: 6.7  - 6.14 (community support)
 
-Note: Kernels earlier than 5.4 may work but are not tested or
-supported.
+Note: Kernels earlier than 5.10 may work but have not been tested.
 
 ### Tested Compilers
 
@@ -97,7 +96,7 @@ which can be provided via PR or message in Issues.
 
 - [openSUSE](https://www.opensuse.org/) Tumbleweed (rolling) (kernel 5.15)
 
-- [Raspberry Pi OS](https://www.raspberrypi.org) (2023-10-10)(kernel 6.6)
+- [Raspberry Pi OS](https://www.raspberrypi.org) (2024-11-19)(kernel 6.6)
 
 - [Raspberry Pi Desktop](https://www.raspberrypi.org) (2022-07-01) (x86 32 bit) (kernel 5.10)
 
@@ -129,8 +128,9 @@ already supported Mediatek chipsets.
 
 * Edup AX5400 EP-AX1671 (single-state, no windows driver onboard)
 
-Warning: The below adapters are multi-state adapters, meaning that they
-have an internal Windows driver, and may be problematic on Linux.
+Warning: The below adapters are also compatible but are multi-state
+adapters, meaning that they have an internal Windows driver, and may be
+problematic.
 
 * Edup AX5400 EP-AX1671S
 * Brostrend AX8
@@ -173,10 +173,10 @@ sudo dkms status
 ```
 
 Warning: If you decide to do a distro upgrade, which will likely install
-a new version of kernel such as 5.15 to 6.1, you need to update this
-driver with the newest available code and then run the removal script
-before performing the disto upgrade. Use the following commands in the
-driver directory:
+a new major version of the kernel such as 6.1 to 6.6, you need to
+update this driver with the newest available code and then run the
+`uninstall-driver.sh` script before performing the disto upgrade. Use
+the following commands in the driver directory:
 
 ```
 git pull
@@ -190,7 +190,7 @@ sudo sh uninstall-driver.sh
 ```
 
 Note: The following command will reinstall the updated driver after you
-are finished with the distro upgrade and reboot.
+are finished with the distro upgrade.
 
 ```
 sudo sh install-driver.sh
@@ -210,10 +210,10 @@ another computer, in which case you will be in a suitable terminal after logging
 in, but this step requires that an SSH daemon/server has already been
 configured. (There are lots of SSH guides available, e.g., for the [Raspberry Pi](https://www.raspberrypi.com/documentation/computers/remote-access.html#setting-up-an-ssh-server) and for [Ubuntu](https://linuxconfig.org/ubuntu-20-04-ssh-server). Do not forget [to secure the SSH server](https://www.howtogeek.com/443156/the-best-ways-to-secure-your-ssh-server/).)
 
-You will need to have sufficient access rights to use `sudo` so that commands
-can be executed as the `root` user. (If the command `sudo echo Yes` returns
-"Yes", with or without having to enter your password, you do have sufficient
-access rights.)
+You will need to have sufficient access rights to use `sudo` so that
+commands can be executed as the `root` user. (If the command `sudo echo
+Yes` returns "Yes", with or without having to enter your password, you
+do have sufficient access rights.)
 
 DKMS is used for the installation, if available. DKMS is a system utility
 which will automatically recompile and reinstall this driver when a new
@@ -223,15 +223,16 @@ It is recommended that you do not delete the driver directory after
 installation as the directory contains information and scripts that you
 may need in the future.
 
-Secure Boot: see FAQ.
+Secure Boot: some information is below but more detailed information is
+in the FAQ.
 
 ### Installation Steps
 
 Note: The installation steps are for the novice user. Experienced
 users are welcome to alter the installation to meet their needs. Support
-will be provided, on a best effort basis, based on the steps below. Another
-way to word this paragraph is that if you do not follow the below steps for
-installation, you are your own tech support.
+will be provided, on a best effort basis, based on the steps below.
+Another way to word this paragraph is that if you do not follow the
+below steps for installation, you are your own tech support.
 
 #### Step 1: Open a terminal (e.g. Ctrl+Alt+T)
 
@@ -426,7 +427,8 @@ gcc --version
 
 If you find your system in a bad situation, it is recommended that you
 install a version of gcc that matches the major version of gcc that was
-used to compile your kernel. Here is an example for Ubuntu:
+used to compile your kernel. Here is an example of how to install gcc-12
+for Ubuntu:
 
 ```
 sudo apt install gcc-12
@@ -449,9 +451,29 @@ or
 sudo sh install-driver.sh
 ```
 
-Note: If you elect to skip the reboot at the end of the installation
-script, the driver may not load immediately and the driver options will
-not be applied. Rebooting is strongly recommended.
+Important: If you are installing to a system that has Secure Boot
+active, you will see a `Configuring Secure Boot` screen come up. The
+following instructions were tested on Ubuntu 24.04.1. Some distros do
+not support Secure Boot and some distros require different instructions.
+
+Read the information on the `Configuring Secure Boot` screen.
+
+Tab to select OK. Press Enter
+
+Enter a password and press Enter (twice). I use the same password as my
+system uses.
+
+During the next boot, you will see the MOK managerment screen.
+
+Select the following:
+
+Enroll MOK
+
+Continue
+
+Enroll the key? Yes
+
+Enter password
 
 Note: Fedora users that have secure boot turned on may need to run the
 following to enroll the key:
@@ -459,6 +481,10 @@ following to enroll the key:
 ```
 sudo mokutil --import /var/lib/dkms/mok.pub
 ```
+
+Note: If you elect to skip the reboot at the end of the installation
+script, the driver may not load immediately and the driver options will
+not be applied. Rebooting is strongly recommended.
 
 ### Manual Installation Instructions
 
@@ -493,28 +519,29 @@ enter commands.
 sudo make sign-install
 ```
 
-Note: You will be promted for a password, please remember the password
-as it will be used in some of the following steps.
+Important: If you are installing to a system that has Secure Boot
+active, you will see a `Configuring Secure Boot` screen come up.
 
-```
-sudo reboot
-```
+Read the information on the screen.
 
-The MOK managerment screen will appear during boot:
+Tab to select OK. Press Enter
 
-`Shim UEFI Key Management`
+Enter a password and press Enter (twice). I use the same password as my
+system uses.
 
-`Press any key...`
+During the next boot, you will see the MOK managerment screen.
 
-Select "Enroll key"
+Select the following:
 
-Select "Continue"
+Enroll MOK
 
-Select "Yes"
+Continue
 
-When promted, enter the password you entered earlier.
+Enroll the key? Yes
 
-Warning: If you enter the wrong password, your computer will not be
+Enter password
+
+Warning: If you enter the wrong password, your computer may not be
 bootable. In this case, use the BOOT menu from your BIOS to boot then as
 follows:
 

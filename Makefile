@@ -34,6 +34,7 @@ EXTRA_CFLAGS += -Wno-missing-prototypes
 EXTRA_CFLAGS += -Wno-empty-body
 EXTRA_CFLAGS += -Wno-old-style-declaration
 EXTRA_CFLAGS += -Wno-restrict
+#EXTRA_CFLAGS += -Wno-discarded-qualifiers
 EXTRA_CFLAGS += -Wno-incompatible-pointer-types
 
 GCC_VER_49 := $(shell echo `$(CC) -dumpversion | cut -f1-2 -d.` \>= 4.9 | bc )
