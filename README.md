@@ -1,3 +1,53 @@
+# ALPS description
+
+## WI-U3-2400XE2 (rtl8852cu)
+
+> [!IMPORTANT]
+> The following steps assume an Ubuntu environment.
+
+### Installation Steps
+
+#### Step 1: Update and upgrade system packages
+```
+sudo apt update
+sudo apt upgrade -y
+```
+
+#### Step 2: Reboot system
+```
+sudo reboot
+```
+
+#### Step 3: Install required packages
+```
+sudo apt install -y build-essential dkms git iw
+```
+
+#### Step 4: Move to the home directory
+```
+cd ~
+```
+
+#### Step 5: Clone the repository
+```
+git clone https://github.com/shinshu-alps/rtl8852cu-20240510.git
+```
+
+#### Step 6: Change to the directory of the downloaded repository
+```
+cd ~/rtl8852cu-20240510
+```
+
+#### Step 7: Run the installation script
+> [!NOTE]
+> It is recommended to close any apps running in the background before running the script.
+
+```
+sudo sh install-driver.sh
+```
+
+
+# Original description
 ## rtl8852cu ( 8852cu.ko ) :rocket:
 
 ## Linux Driver for USB WiFi Adapters that are based on the RTL8832CU and RTL8852CU Chipsets
