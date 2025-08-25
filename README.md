@@ -35,7 +35,6 @@ following links will provide more information:
 - Miracast
 - WiFi-Direct
 - Wake on WLAN
-- AP mode DFS channel support
 - Supported interface modes
   * IBSS (not tested)
   * Managed
@@ -48,9 +47,9 @@ following links will provide more information:
 
 > [!NOTE]
 > Monitor mode is not supported.
-> Linux users that want good support for monitor mode in a dual band or tri-band
-> adapter should seek out USB WiFi adapters based on the mt7610u, mt7612u or mt7921au
-> chipsets.
+> Linux users that want good support for monitor mode in a dual band or
+> tri-band adapter should seek out USB WiFi adapters based on the
+> mt7610u, mt7612u or mt7921au chipsets.
 
 ### A FAQ is available in this repo with the name `FAQ.md`
 
@@ -71,7 +70,7 @@ Note: Additional CPU architectures may work but have not been tested.
 ### Compatible Kernels
 
 - Kernels: 5.10 - 6.6 (Realtek)
-- Kernels: 6.7  - 6.14 (community support)
+- Kernels: 6.7  - 6.16 (community support)
 
 Note: Kernels earlier than 5.10 may work but have not been tested.
 
@@ -86,11 +85,9 @@ which can be provided via PR or message in Issues.
 
 - [Arch Linux](https://www.archlinux.org) (kernels 5.4 and 5.11)
 
-- [Debian](https://www.debian.org/) (kernels 5.10, 5.15 and 6.1)
+- [Debian](https://www.debian.org/) (kernels 5.10, 5.15, 6.1 and 6.12)
 
 - [Fedora](https://getfedora.org) Fedora 38 (6.2.13-300)
-
-- [Kali Linux](https://www.kali.org/) (kernel 6.3)
 
 - [Manjaro](https://manjaro.org) (kernel 5.15)
 
@@ -101,6 +98,8 @@ which can be provided via PR or message in Issues.
 - [Raspberry Pi Desktop](https://www.raspberrypi.org) (2022-07-01) (x86 32 bit) (kernel 5.10)
 
 - [Ubuntu](https://www.ubuntu.com) 24.04 (kernel 6.8) and 24.10 (kernel 6.11)
+  
+- [Zorin](https://zorin.com/) 17.3 (kernel 6.8)
 
 Note: Red Hat Enterprise Linux (RHEL) and distros based on RHEL are
 supported by Red Hat devs due to the way kernel patches are handled in
@@ -137,7 +136,7 @@ problematic.
 * TP-Link Archer TX50UH V1
 * TP-Link Archer TXE70UH(EU) V1
 * MSI AXE5400
-
+* Wavlink WL-WN695X2-A
 * Additional adapters that are based on the supported chipsets.
 
 Note: If you are looking for information about what adapter to buy,
@@ -617,7 +616,7 @@ kernel 5.10 to kernel 5.15)
 #### Step 1: Move to the driver directory
 
 ```
-cd ~/src/rtl8852cu
+cd ~/src/rtl8852cu-20240510
 ```
 
 #### Step 2: Pull updated code from this repo
@@ -649,7 +648,7 @@ The driver directory can be deleted after running this script.
 #### Step 2: Move to the driver directory
 
 ```
-cd ~/src/rtl8852cu
+cd ~/src/rtl8852cu-20240510
 ```
 
 #### Step 3: Run the removal script
